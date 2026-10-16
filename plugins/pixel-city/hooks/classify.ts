@@ -23,7 +23,7 @@ export const classify = (tool: string, input: Record<string, unknown>): Pick<Act
     case 'WebSearch':
       return { kind: 'search', label: 'ИЩУ В СЕТИ', detail: short(input.query, 30) }
     case 'WebFetch':
-      return { kind: 'search', label: 'ОТКРЫВАЮ САЙТ', detail: short(String(input.url ?? '').replace(/^https?:\/\//, ''), 30) }
+      return { kind: 'search', label: 'САЙТ', detail: short(String(input.url ?? '').replace(/^https?:\/\//, ''), 30) }
     case 'Agent':
     case 'Task':
       return { kind: 'agent', label: 'ПОМОЩНИК', detail: short(input.description, 30) }

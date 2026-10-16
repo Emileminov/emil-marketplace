@@ -28,8 +28,8 @@ export const textWidth = (s: string) => Math.max(0, s.length * 6 - 1)
 export const text = (s: string, x: number, y: number, fill: string) => {
   let out = ''
   let cx = x
-  for (const ch of s.toUpperCase()) {
-    const rows = GLYPHS[ch]
+  for (const ch of s) {
+    const rows = GLYPHS[ch] ?? GLYPHS[ch.toUpperCase()]
     if (rows) {
       rows.forEach((row, ry) => {
         for (let i = 0; i < row.length; i++) if (row[i] === '1') out += rect(cx + i, y + ry, 1, 1, fill)

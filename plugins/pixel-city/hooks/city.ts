@@ -6,20 +6,23 @@ import { klodik } from './klodik'
 export { CELL, GH, levelColor }
 export type Meter = { name: string; pct: number | null; reset: string | null }
 
+// 4:29 means 4 hours 29 minutes; a day or more is shown as days (1,5 = a day and a half).
 export const formatReset = (ms: number) => {
   const m = Math.max(0, Math.round(ms / 60000))
-  if (m >= 1440) return `${Math.floor(m / 1440)}Д${Math.floor((m % 1440) / 60)}Ч`
-  if (m >= 60) return `${Math.floor(m / 60)}Ч${m % 60}М`
-  return `${m}М`
+  if (m >= 1440) {
+    const d = Math.round((m / 1440) * 10) / 10
+    return `${String(d).replace('.', ',')} ДН`
+  }
+  return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`
 }
 
 const WIN_COLS = 3
 const WIN_ROWS = 5
 const TOWER_W = 10
-const GROUP_W = TOWER_W + 3 + 65
-const GROUP_GAP = 4
+const GROUP_W = TOWER_W + 3 + 71
+const GROUP_GAP = 5
 const GROUND = 28
-const STATUS_X = 50
+const STATUS_X = 48
 
 const tower = (m: Meter, x0: number) => {
   let s = rect(x0, 4, TOWER_W, GROUND - 4, C.line, 3)
@@ -38,7 +41,7 @@ const tower = (m: Meter, x0: number) => {
   s += text(m.name, tx, 2, C.sub)
   const num = m.pct === null ? '--' : `${Math.round(m.pct)}%`
   s += text(num, tx, 11, m.pct === null ? C.sub : levelColor(m.pct))
-  if (m.reset) s += text(`СБРОС ${m.reset}`, tx, 21, C.sub)
+  if (m.reset) s += text(`ЧЕРЕЗ ${m.reset}`, tx, 21, C.sub)
   return s
 }
 
@@ -64,12 +67,12 @@ export const buildCity = (gw: number, meters: Meter[], act: Act, worst: number |
 
   // limits on the right
   const limW = 3 * GROUP_W + 2 * GROUP_GAP
-  const limLeft = gw - limW - 8
+  const limLeft = gw - limW - 6
   meters.forEach((m, i) => (s += tower(m, limLeft + i * (GROUP_W + GROUP_GAP))))
-  s += rect(limLeft - 5, 4, 1, 20, C.line)
+  s += rect(limLeft - 4, 4, 1, 20, C.line)
 
   // status on the left: Klodik, what he does, the path taken
-  const statusW = limLeft - 9 - STATUS_X
+  const statusW = limLeft - 8 - STATUS_X
   const maxChars = Math.max(4, Math.floor((statusW + 1) / 6))
   const low = act.kind === 'idle' && worst !== null && worst >= 90
   const label = (low ? 'МАЛО ЛИМИТА' : act.label).slice(0, maxChars)

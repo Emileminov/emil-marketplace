@@ -3,14 +3,14 @@ import { test, expect } from 'claude-code/testing'
 import { buildCity, formatReset } from './city'
 
 test('reset formats', () => {
-  expect(formatReset(130 * 60000)).toBe('2Ч10М')
-  expect(formatReset(30 * 60000)).toBe('30М')
-  expect(formatReset((3 * 1440 + 240) * 60000)).toBe('3Д4Ч')
+  expect(formatReset(130 * 60000)).toBe('2:10')
+  expect(formatReset(30 * 60000)).toBe('0:30')
+  expect(formatReset((3 * 1440 + 240) * 60000)).toBe('3,2 ДН')
 })
 
 test('one strip is a bounded svg for every state', () => {
   const meters = [
-    { name: '5 ЧАСОВ', pct: 23, reset: '4Ч29М' },
+    { name: '5 ЧАСОВ', pct: 23, reset: '4:29' },
     { name: 'НЕДЕЛЯ', pct: null, reset: null },
     { name: 'КОНТЕКСТ', pct: 95, reset: null },
   ]

@@ -1,6 +1,6 @@
 {
   "name": "pixel-city",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Pixel city above the prompt: Klodik shows what Claude is doing now and your 5-hour, weekly and context limits.",
   "types": "./types/index.d.ts"
 }

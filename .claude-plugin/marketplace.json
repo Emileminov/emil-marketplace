@@ -1,7 +1,7 @@
 {
-  "name": "pixel-city",
+  "name": "emil-marketplace",
   "owner": { "name": "Emileminov" },
   "plugins": [
-    { "name": "pixel-city", "source": "./", "description": "Pixel city above the prompt: Klodik shows your 5-hour, weekly and context limits." }
+    { "name": "pixel-city", "source": "./plugins/pixel-city", "description": "Pixel city above the prompt: Klodik shows your 5-hour, weekly and context limits." }
   ]
 }

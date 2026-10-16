@@ -7,12 +7,7 @@
     {
       "name": "pixel-city",
       "source": "./plugins/pixel-city",
-      "description": "Pixel city above the prompt: Klodik shows your 5-hour, weekly and context limits."
-    },
-    {
-      "name": "klodik-live",
-      "source": "./plugins/klodik-live",
-      "description": "Live commentator: pixel Klodik tells in plain Russian what Claude is doing right now."
+      "description": "Pixel city above the prompt: Klodik shows what Claude is doing now and your 5-hour, weekly and context limits."
     }
   ]
 }

@@ -8,12 +8,15 @@ test('reset formats', () => {
   expect(formatReset((3 * 1440 + 240) * 60000)).toBe('3Д4Ч')
 })
 
-test('city is a bounded svg', () => {
-  const svg = buildCity(200, [
-    { name: '5H', pct: 23, reset: '2H' },
-    { name: '7D', pct: null, reset: null },
-    { name: 'CTX', pct: 95, reset: null },
-  ], 'alarm')
-  expect(svg.startsWith('<svg')).toBe(true)
-  expect(svg.length).toBeLessThan(131072)
+test('one strip is a bounded svg for every state', () => {
+  const meters = [
+    { name: '5 ЧАСОВ', pct: 23, reset: '4Ч29М' },
+    { name: 'НЕДЕЛЯ', pct: null, reset: null },
+    { name: 'КОНТЕКСТ', pct: 95, reset: null },
+  ]
+  for (const kind of ['idle', 'think', 'read', 'edit', 'run', 'search', 'agent', 'done', 'error']) {
+    const svg = buildCity(360, meters, { kind, label: 'ТЕСТ', detail: 'A.TXT', steps: 3, trail: ['read', 'edit'] }, 95)
+    expect(svg.startsWith('<svg')).toBe(true)
+    expect(svg.length).toBeLessThan(131072)
+  }
 })

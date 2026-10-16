@@ -1,0 +1,1 @@
+{ "name": "klodik-live", "version": "0.1.0", "description": "Live commentator: a pixel Klodik above the prompt tells in plain Russian what Claude is doing right now.", "types": "./types/index.d.ts" }

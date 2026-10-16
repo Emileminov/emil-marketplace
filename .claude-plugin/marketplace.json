@@ -1,7 +1,18 @@
 {
   "name": "emil-marketplace",
-  "owner": { "name": "Emileminov" },
+  "owner": {
+    "name": "Emileminov"
+  },
   "plugins": [
-    { "name": "pixel-city", "source": "./plugins/pixel-city", "description": "Pixel city above the prompt: Klodik shows your 5-hour, weekly and context limits." }
+    {
+      "name": "pixel-city",
+      "source": "./plugins/pixel-city",
+      "description": "Pixel city above the prompt: Klodik shows your 5-hour, weekly and context limits."
+    },
+    {
+      "name": "klodik-live",
+      "source": "./plugins/klodik-live",
+      "description": "Live commentator: pixel Klodik tells in plain Russian what Claude is doing right now."
+    }
   ]
 }

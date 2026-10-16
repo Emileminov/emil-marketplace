@@ -18,7 +18,9 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    if (e.props.hasSurvey) return next(e)
+    // another band beneath (the live commentator) stays, the city stacks above it
+    const below = await next(e)
+    if (e.props.hasSurvey) return below
 
     await read($, tick)
     const usage = await $.session.usage()
@@ -45,7 +47,7 @@ export const register: Register = on => {
 
     if (e.surface === 'terminal') {
       const { Box, Text } = $.ui.resolve(e)
-      return (
+      const row = (
         <Box gap={2}>
           {meters.map(m => (
             <Text key={m.name} color={m.pct === null ? undefined : levelText(m.pct)}>
@@ -55,14 +57,15 @@ export const register: Register = on => {
           ))}
         </Box>
       )
+      return below ? <Box flexDirection="column">{row}{below}</Box> : row
     }
 
-    const { Svg } = $.ui.resolve(e)
+    const { Box, Svg } = $.ui.resolve(e)
     const gw = Math.max(330, Math.min(700, Math.floor(e.props.bodyColumns * 4)))
     const width = gw * CELL
     const height = GH * CELL
 
-    return (
+    const band = (
       <Svg
         source={buildCity(gw, meters, mood)}
         alt={`Pixel city: 5h ${meters[0].pct ?? 'n/a'}%, week ${meters[1].pct ?? 'n/a'}%, context ${meters[2].pct ?? 'n/a'}%`}
@@ -71,5 +74,6 @@ export const register: Register = on => {
         isInteractive
       />
     )
+    return below ? <Box flexDirection="column">{band}{below}</Box> : band
   })
 }

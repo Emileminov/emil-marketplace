@@ -1,0 +1,1 @@
+{ "name": "instrument-panel", "version": "0.1.0", "description": "Engineering instrument panel above the prompt: what Claude is doing now, plus 5-hour, weekly and context limits as segmented gauges.", "types": "./types/index.d.ts" }
